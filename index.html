@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Vue Mastery</title>
+    <title>Attribute Binding</title>
     <!-- Import Styles -->
     <link rel="stylesheet" href="./assets/styles.css" />
     <!-- Import Vue.js -->
@@ -10,11 +10,26 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{ product }}</h1>
-      <!-- Solution -->
-      <p>{{ description }}</p>
-      <!-- Solution -->
+      <div class="nav-bar"></div>
+      
+      <div class="product-display">
+        <div class="product-container">
+          <div class="product-image">
+            <img v-bind:src="image">
+            <!-- how do we bind src to image?  v-bind:src this is v-bind directive-->
+            <!-- v-bind : Dynamically bind an attribute (ex: src) to an expression (ex: "image") -->
+          </div>
+          <div class="product-info">
+            <h1>{{ product }}</h1>
+            <!-- solution -->
+            <a :href="url">Made by Vue Mastery</a>
+            <!-- :href is shorthand for v-bind:href -->
+            <!-- solution -->
+          </div>
+        </div>
+      </div>
     </div>
+
 
     <!-- Import App -->
     <script src="./main.js"></script>
