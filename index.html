@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Components & Props</title>
+    <title>Communicating Events</title>
     <!-- Import Styles -->
     <link rel="stylesheet" href="./assets/styles.css" />
     <!-- Import Vue.js -->
@@ -12,8 +12,12 @@
     <div id="app">
       <div class="nav-bar"></div>
 
-      <div class="cart">Cart({{ cart }})</div>
-      <product-display :premium="premium"></product-display>
+      <div class="cart">Cart({{ cart.length }})</div>
+      <product-display 
+        :premium="premium" 
+        @add-to-cart="updateCart"
+        @remove-from-cart="removeById"> <!-- solution -->
+      </product-display>
     </div>
 
 
@@ -22,9 +26,6 @@
 
     <!-- Import Components -->
     <script src="./components/ProductDisplay.js"></script>
-    <!-- solution -->
-    <script src="./components/ProductDetails.js"></script>
-    <!-- solution -->
 
     <!-- Mount App -->
     <script>

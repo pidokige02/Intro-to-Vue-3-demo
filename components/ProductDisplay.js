@@ -1,5 +1,5 @@
 app.component('product-display', {
-  props: {  // A custom attribute for passing data into a component
+  props: {
     premium: {
       type: Boolean,
       required: true
@@ -19,10 +19,9 @@ app.component('product-display', {
         <p v-else>Out of Stock</p>
 
         <p>Shipping: {{ shipping }}</p>
-        
-        <!-- solution -->
-        <product-details :details="details"></product-details>
-        <!-- solution -->
+        <ul>
+          <li v-for="detail in details">{{ detail }}</li>
+        </ul>
 
         <div 
           v-for="(variant, index) in variants" 
@@ -39,6 +38,17 @@ app.component('product-display', {
           v-on:click="addToCart">
           Add to Cart
         </button>
+
+        <!-- solution -->
+        <button 
+        class="button" 
+        :class="{ disabledButton: !inStock }" 
+        :disabled="!inStock" 
+        @click="removeFromCart">
+        Remove Item
+      </button>
+      <!-- solution -->
+
       </div>
     </div>
   </div>`,
@@ -56,8 +66,16 @@ app.component('product-display', {
   },
   methods: {
       addToCart() {
-          this.cart += 1
+          // Emitting Events : Tells "parent" when event happens
+          this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
+          // cart is an array and updateCart(id) pushes the product id into it. We just need to add a payload to our add-to-cart event emission, 
+          // so updateCart has access to that id.
       },
+      // solution
+      removeFromCart() {
+        this.$emit('remove-from-cart', this.variants[this.selectedVariant].id)
+      },
+      // solution
       updateVariant(index) {
           this.selectedVariant = index
       }
